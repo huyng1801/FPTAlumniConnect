@@ -19,6 +19,7 @@ namespace FPTAlumniConnect.BusinessTier.Constants
             public const string AuthenticationEndpoint = ApiEndpoint + "/auth";
             public const string Login = AuthenticationEndpoint + "/login";
             public const string Register = AuthenticationEndpoint + "/register";
+            public const string GoogleLogin = AuthenticationEndpoint + "/login-google";
         }
         public static class User
         {

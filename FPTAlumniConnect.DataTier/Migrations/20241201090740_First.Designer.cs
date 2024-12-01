@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FPTAlumniConnect.DataTier.Migrations
 {
     [DbContext(typeof(AlumniConnectContext))]
-    [Migration("20241112103802_ChangeStringToInt")]
-    partial class ChangeStringToInt
+    [Migration("20241201090740_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1205,6 +1205,10 @@ namespace FPTAlumniConnect.DataTier.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
+                    b.Property<string>("Code")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
@@ -1254,7 +1258,7 @@ namespace FPTAlumniConnect.DataTier.Migrations
                     b.Property<string>("ProfilePicture")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RoleId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int")
                         .HasColumnName("RoleID");
 
@@ -1584,6 +1588,8 @@ namespace FPTAlumniConnect.DataTier.Migrations
                     b.HasOne("FPTAlumniConnect.DataTier.Models.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK__Users__RoleID__5BE2A6F2");
 
                     b.Navigation("Major");

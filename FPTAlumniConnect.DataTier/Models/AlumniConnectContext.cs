@@ -568,6 +568,9 @@ public partial class AlumniConnectContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.EmailVerified).HasDefaultValueSql("((0))");
             entity.Property(e => e.FirstName).HasMaxLength(255);
+            entity.Property(e => e.Code) 
+                .HasMaxLength(20)
+                .IsRequired(false);
             entity.Property(e => e.GoogleId).HasColumnName("GoogleID");
             entity.Property(e => e.IsMentor)
                 .HasDefaultValueSql("((0))")

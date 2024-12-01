@@ -4,6 +4,7 @@ namespace FPTAlumniConnect.BusinessTier.Payload.User
 {
     public class RegisterRequest
     {
+        public string? Code { get; set; }
         [Required]
         public string FirstName { get; set; } = null!;
 
@@ -17,10 +18,7 @@ namespace FPTAlumniConnect.BusinessTier.Payload.User
         [Required]
         [MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
         public string Password { get; set; } = null!;
-
-        public string? ProfilePicture { get; set; }
         public int RoleId { get; set; } = 2;
-
         public int? MajorId { get; set; } 
     }
 }

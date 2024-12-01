@@ -42,5 +42,21 @@ namespace FPTAlumniConnect.API.Controllers
 
             return CreatedAtAction(nameof(Register), new { id = response.UserId }, response);
         }
+        [HttpPost(ApiEndPointConstant.Authentication.GoogleLogin)]
+        [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GoogleLogin([FromBody] LoginGoogleRequest request)
+        {
+            try
+            {
+                var response = await _userService.LoginWithGoogle(request);
+                return Ok(response);
+            }
+            catch (BadHttpRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

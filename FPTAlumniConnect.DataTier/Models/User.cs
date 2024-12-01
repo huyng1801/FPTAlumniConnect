@@ -6,6 +6,7 @@ namespace FPTAlumniConnect.DataTier.Models;
 public partial class User
 {
     public int UserId { get; set; }
+    public string? Code { get; set; }
 
     public string FirstName { get; set; } = null!;
 
