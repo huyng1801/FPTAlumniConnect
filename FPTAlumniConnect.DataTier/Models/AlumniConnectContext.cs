@@ -60,6 +60,8 @@ public partial class AlumniConnectContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserJoinEvent> UserJoinEvents { get; set; }
+    public DbSet<WorkExperience> WorkExperiences { get; set; }
+    public DbSet<Education> Educations { get; set; }
     public DbSet<Notification> Notifications { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Server=(local);Database=AlumniConnect;Integrated Security=True;TrustServerCertificate=True;");

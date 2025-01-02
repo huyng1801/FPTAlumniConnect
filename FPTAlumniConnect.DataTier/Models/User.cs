@@ -69,4 +69,7 @@ public partial class User
     public virtual ICollection<SoicalLink> SoicalLinks { get; set; } = new List<SoicalLink>();
 
     public virtual ICollection<UserJoinEvent> UserJoinEvents { get; set; } = new List<UserJoinEvent>();
+    // New relationships for WorkExperience and Education
+    public virtual ICollection<WorkExperience> WorkExperiences { get; set; } = new List<WorkExperience>();
+    public virtual ICollection<Education> EducationRecords { get; set; } = new List<Education>();
 }

@@ -136,5 +136,19 @@ namespace FPTAlumniConnect.BusinessTier.Constants
             public const string PhoBertEndpoint = ApiEndpoint + "/phobert";
             public const string FindBestMatchingCVEndpoint = PhoBertEndpoint + "/find-best-matching-cv";
         }
+        public static class Education
+        {
+            public const string EducationsEndPoint = ApiEndpoint + "/educations";
+            public const string EducationEndPoint = EducationsEndPoint + "/{id}";
+            public const string EducationUserEndPoint = EducationsEndPoint + "/user/{id}";
+        }
+
+        public static class WorkExperience
+        {
+            public const string WorkExperiencesEndPoint = ApiEndpoint + "/work-experiences";
+            public const string WorkExperienceEndPoint = WorkExperiencesEndPoint + "/{id}";
+            public const string WorkExperienceUserEndPoint = WorkExperiencesEndPoint + "/user/{id}";
+        }
+
     }
 }

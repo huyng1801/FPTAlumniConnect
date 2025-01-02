@@ -40,13 +40,13 @@ namespace FPTAlumniConnect.API.Extensions
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            var pathToKey = Path.Combine(Directory.GetCurrentDirectory(), "firebaseConfig.json");
-            FirebaseApp.Create(new AppOptions
-            {
-                Credential = GoogleCredential.FromFile(pathToKey)
-            }, "[DEFAULT]");
+            //var pathToKey = Path.Combine(Directory.GetCurrentDirectory(), "firebaseConfig.json");
+            //FirebaseApp.Create(new AppOptions
+            //{
+            //    Credential = GoogleCredential.FromFile(pathToKey)
+            //}, "[DEFAULT]");
             
-            services.AddScoped<IFirebaseService, FirebaseService>();
+            //services.AddScoped<IFirebaseService, FirebaseService>();
             services.AddScoped<IUserService, UserService> ();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IPostReportService, PostReportService>();
@@ -69,8 +69,9 @@ namespace FPTAlumniConnect.API.Extensions
             services.AddScoped<IMessageGroupChatService, MessageGroupChatService>();
             services.AddScoped<IGroupChatService, GroupChatService>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<IWorkExperienceService, WorkExperienceService>();
 
-        
             return services;
         }
 
