@@ -22,8 +22,7 @@ namespace FPTAlumniConnect.API.Controllers
         }
 
         // POST api/education
-        [HttpPost]
-        [Route(ApiEndPointConstant.Education.EducationEndPoint)]
+        [HttpPost(ApiEndPointConstant.Education.EducationsEndPoint)]
         [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateEducation([FromBody] EducationInfo request)
@@ -45,8 +44,7 @@ namespace FPTAlumniConnect.API.Controllers
         }
 
         // GET api/education/{id}
-        [HttpGet("{id}")]
-        [Route(ApiEndPointConstant.Education.EducationEndPoint)]
+        [HttpGet(ApiEndPointConstant.Education.EducationEndPoint)] // Specify route here
         [ProducesResponseType(typeof(EducationResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetEducationById(int id)
@@ -63,8 +61,7 @@ namespace FPTAlumniConnect.API.Controllers
         }
 
         // PUT api/education/{id}
-        [HttpPut("{id}")]
-        [Route(ApiEndPointConstant.Education.EducationEndPoint)]
+        [HttpPut(ApiEndPointConstant.Education.EducationEndPoint)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -91,8 +88,7 @@ namespace FPTAlumniConnect.API.Controllers
         }
 
         // DELETE api/education/{id}
-        [HttpDelete("{id}")]
-        [Route(ApiEndPointConstant.Education.EducationEndPoint)]
+        [HttpDelete(ApiEndPointConstant.Education.EducationEndPoint)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteEducation(int id)
@@ -113,8 +109,7 @@ namespace FPTAlumniConnect.API.Controllers
         }
 
         // GET api/education
-        [HttpGet]
-        [Route(ApiEndPointConstant.Education.EducationEndPoint)]
+        [HttpGet(ApiEndPointConstant.Education.EducationsEndPoint)]
         [ProducesResponseType(typeof(IPaginate<EducationResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllEducation([FromQuery] EducationFilter filter, [FromQuery] PagingModel pagingModel)

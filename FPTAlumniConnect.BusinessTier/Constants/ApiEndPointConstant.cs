@@ -149,6 +149,10 @@ namespace FPTAlumniConnect.BusinessTier.Constants
             public const string WorkExperienceEndPoint = WorkExperiencesEndPoint + "/{id}";
             public const string WorkExperienceUserEndPoint = WorkExperiencesEndPoint + "/user/{id}";
         }
-
+        public static class TimeLine
+        {
+            public const string TimeLinesEndPoint = "timelines";
+            public const string TimeLineEndPoint = "timelines/{id}";
+        }
     }
 }

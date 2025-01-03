@@ -26,8 +26,8 @@ namespace FPTAlumniConnect.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        [Route("create")]
+
+        [HttpPost(ApiEndPointConstant.WorkExperience.WorkExperiencesEndPoint)]
         [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateWorkExperience([FromBody] WorkExperienceInfo request)
@@ -44,8 +44,8 @@ namespace FPTAlumniConnect.API.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("{id}")]
+
+        [HttpGet(ApiEndPointConstant.WorkExperience.WorkExperienceEndPoint)]
         [ProducesResponseType(typeof(WorkExperienceResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetWorkExperienceById(int id)
@@ -62,8 +62,8 @@ namespace FPTAlumniConnect.API.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("{id}")]
+
+        [HttpPut(ApiEndPointConstant.WorkExperience.WorkExperienceEndPoint)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -88,8 +88,7 @@ namespace FPTAlumniConnect.API.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("{id}")]
+        [HttpDelete(ApiEndPointConstant.WorkExperience.WorkExperienceEndPoint)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteWorkExperience(int id)
@@ -113,7 +112,7 @@ namespace FPTAlumniConnect.API.Controllers
             }
         }
 
-        [HttpGet(ApiEndPointConstant.WorkExperience.WorkExperienceEndPoint)]
+        [HttpGet(ApiEndPointConstant.WorkExperience.WorkExperiencesEndPoint)]
         [ProducesResponseType(typeof(IPaginate<WorkExperienceResponse>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllWorkExperiences([FromQuery] WorkExperienceFilter filter, [FromQuery] PagingModel pagingModel)
         {
