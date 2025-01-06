@@ -332,7 +332,7 @@ namespace FPTAlumniConnect.DataTier.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Img")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");

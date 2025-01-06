@@ -196,6 +196,7 @@ public partial class AlumniConnectContext : DbContext
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Img).HasColumnType("TEXT");
             entity.Property(e => e.UpdatedBy).HasMaxLength(255);
             entity.Property(e => e.Status)
     .HasDefaultValue(false); 

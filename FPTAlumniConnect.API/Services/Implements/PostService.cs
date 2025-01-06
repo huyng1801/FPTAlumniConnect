@@ -5,6 +5,8 @@ using FPTAlumniConnect.BusinessTier.Payload.Post;
 using FPTAlumniConnect.DataTier.Models;
 using FPTAlumniConnect.DataTier.Paginate;
 using FPTAlumniConnect.DataTier.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore;
 
 namespace FPTAlumniConnect.API.Services.Implements
 {
@@ -31,8 +33,10 @@ namespace FPTAlumniConnect.API.Services.Implements
 
         public async Task<PostReponse> GetPostById(int id)
         {
+            Func<IQueryable<Post>, IIncludableQueryable<Post, object>> include = q => q.Include(u => u.Major);
+
             Post post = await _unitOfWork.GetRepository<Post>().SingleOrDefaultAsync(
-                predicate: x => x.PostId.Equals(id)) ??
+                predicate: x => x.PostId.Equals(id), include: include) ??
                 throw new BadHttpRequestException("PostNotFound");
 
             PostReponse result = _mapper.Map<PostReponse>(post);
@@ -69,9 +73,12 @@ namespace FPTAlumniConnect.API.Services.Implements
 
         public async Task<IPaginate<PostReponse>> ViewAllPost(PostFilter filter, PagingModel pagingModel)
         {
+            Func<IQueryable<Post>, IIncludableQueryable<Post, object>> include = q => q.Include(u => u.Major);
+
             IPaginate<PostReponse> response = await _unitOfWork.GetRepository<Post>().GetPagingListAsync(
                 selector: x => _mapper.Map<PostReponse>(x),
                 filter: filter,
+                include: include,
                 orderBy: x => x.OrderBy(x => x.CreatedAt),
                 page: pagingModel.page,
                 size: pagingModel.size

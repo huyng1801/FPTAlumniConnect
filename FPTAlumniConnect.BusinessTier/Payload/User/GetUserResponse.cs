@@ -20,6 +20,7 @@ namespace FPTAlumniConnect.BusinessTier.Payload.User
         public string? ProfilePicture { get; set; }
 
         public int? RoleId { get; set; }
+        public string? RoleName { get; set; }
 
         public int? MajorId { get; set; }
 
