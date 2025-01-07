@@ -23,6 +23,7 @@ namespace FPTAlumniConnect.BusinessTier.Payload.User
         public string? RoleName { get; set; }
 
         public int? MajorId { get; set; }
+        public string? MajorName { get; set; }
 
         public string? GoogleId { get; set; }
 

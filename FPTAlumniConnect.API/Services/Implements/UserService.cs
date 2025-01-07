@@ -47,8 +47,9 @@ namespace FPTAlumniConnect.API.Services.Implements
 
         public async Task<GetUserResponse> GetUserById(int id)
         {
+            Func<IQueryable<User>, IIncludableQueryable<User, object>> include = q => q.Include(u => u.Role).Include(u => u.Major);
             User user = await _unitOfWork.GetRepository<User>().SingleOrDefaultAsync(
-                predicate: x => x.UserId.Equals(id)) ??
+                predicate: x => x.UserId.Equals(id), include: include) ??
                 throw new BadHttpRequestException("UserNotFound");
 
             GetUserResponse result = _mapper.Map<GetUserResponse>(user);
@@ -208,18 +209,18 @@ namespace FPTAlumniConnect.API.Services.Implements
                 throw new BadHttpRequestException("UserNotFound");
 
             // Check if the logged-in user is an admin or staff
-            var loggedInUserRole = _httpContextAccessor.HttpContext?.User.FindFirst("Role")?.Value; // Assuming Role is stored as a claim
-            if (loggedInUserRole != null && (loggedInUserRole == "admin" || loggedInUserRole == "staff"))
-            {
-                user.IsMentor = request.IsMentor;
+            //var loggedInUserRole = _httpContextAccessor.HttpContext?.User.FindFirst("Role")?.Value; // Assuming Role is stored as a claim
+            //if (loggedInUserRole != null && (loggedInUserRole == "admin" || loggedInUserRole == "staff"))
+            //{
+            //    user.IsMentor = request.IsMentor;
 
-            }
+            //}
 
             // Update other fields
             user.FirstName = string.IsNullOrEmpty(request.FirstName) ? user.FirstName : request.FirstName;
             user.Email = string.IsNullOrEmpty(request.Email) ? user.Email : request.Email;
             user.LastName = string.IsNullOrEmpty(request.LastName) ? user.LastName : request.LastName;
-
+            user.ProfilePicture = string.IsNullOrEmpty(request.ProfilePicture) ? user.ProfilePicture : request.ProfilePicture;
             user.UpdatedAt = DateTime.Now;
             user.UpdatedBy = _httpContextAccessor.HttpContext?.User.Identity?.Name;
 
@@ -235,12 +236,12 @@ namespace FPTAlumniConnect.API.Services.Implements
         public async Task<IPaginate<GetUserResponse>> ViewAllUser(UserFilter filter, PagingModel pagingModel)
         {
             // Define include to include the Role entity
-            Func<IQueryable<User>, IIncludableQueryable<User, object>> include = q => q.Include(u => u.Role);
+            Func<IQueryable<User>, IIncludableQueryable<User, object>> include = q => q.Include(u => u.Role).Include(u => u.Major);
 
             // Call GetPagingListAsync with a selector, include, and other parameters
             IPaginate<GetUserResponse> response = await _unitOfWork.GetRepository<User>().GetPagingListAsync(
                 selector: x => _mapper.Map<GetUserResponse>(x),  
-               
+                filter: filter,
                 orderBy: x => x.OrderBy(u => u.Email),         
                 include: include,                              
                 page: pagingModel.page,                         

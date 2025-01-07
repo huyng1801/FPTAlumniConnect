@@ -5,6 +5,8 @@ using FPTAlumniConnect.BusinessTier.Payload.JobPost;
 using FPTAlumniConnect.DataTier.Models;
 using FPTAlumniConnect.DataTier.Paginate;
 using FPTAlumniConnect.DataTier.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore;
 
 namespace FPTAlumniConnect.API.Services.Implements
 {
@@ -28,8 +30,9 @@ namespace FPTAlumniConnect.API.Services.Implements
 
         public async Task<JobPostResponse> GetJobPostById(int id)
         {
+            Func<IQueryable<JobPost>, IIncludableQueryable<JobPost, object>> include = q => q.Include(u => u.Major);
             JobPost jobPost = await _unitOfWork.GetRepository<JobPost>().SingleOrDefaultAsync(
-                predicate: x => x.JobPostId.Equals(id)) ??
+                predicate: x => x.JobPostId.Equals(id), include: include) ??
                 throw new BadHttpRequestException("JobPostNotFound");
 
             JobPostResponse result = _mapper.Map<JobPostResponse>(jobPost);
@@ -63,9 +66,11 @@ namespace FPTAlumniConnect.API.Services.Implements
 
         public async Task<IPaginate<JobPostResponse>> ViewAllJobPosts(JobPostFilter filter, PagingModel pagingModel)
         {
+            Func<IQueryable<JobPost>, IIncludableQueryable<JobPost, object>> include = q => q.Include(u => u.Major);
             IPaginate<JobPostResponse> response = await _unitOfWork.GetRepository<JobPost>().GetPagingListAsync(
                 selector: x => _mapper.Map<JobPostResponse>(x),
                 filter: filter,
+                include: include,
                 orderBy: x => x.OrderBy(x => x.CreatedAt),
                 page: pagingModel.page,
                 size: pagingModel.size

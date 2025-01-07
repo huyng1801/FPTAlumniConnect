@@ -1331,7 +1331,7 @@ namespace FPTAlumniConnect.DataTier.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int")

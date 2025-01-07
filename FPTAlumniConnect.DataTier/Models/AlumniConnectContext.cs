@@ -584,6 +584,8 @@ public partial class AlumniConnectContext : DbContext
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.ProfilePicture)
+             .HasColumnType("text");
             entity.Property(e => e.UpdatedBy).HasMaxLength(255);
 
             entity.HasOne(d => d.Major).WithMany(p => p.Users)
