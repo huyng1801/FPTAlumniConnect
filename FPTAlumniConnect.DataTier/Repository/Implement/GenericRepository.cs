@@ -42,6 +42,11 @@ namespace FPTAlumniConnect.DataTier.Repository.Implement
             return await query.FirstOrDefaultAsync();
         }
 
+        public virtual async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.AnyAsync(predicate);
+        }
+
         public virtual async Task<T> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
             IQueryable<T> query = _dbSet;

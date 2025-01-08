@@ -1,4 +1,5 @@
 ﻿using FPTAlumniConnect.DataTier.Paginate;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
@@ -14,6 +15,7 @@ namespace FPTAlumniConnect.DataTier.Repository.Interfaces
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null);
 
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
 
         Task<T> SingleOrDefaultAsync(
             Expression<Func<T, bool>> predicate = null,
